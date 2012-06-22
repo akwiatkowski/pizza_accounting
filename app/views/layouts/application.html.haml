@@ -1,0 +1,35 @@
+!!!
+%html
+
+  %head
+    %title
+      - _title = yield(:title).to_s
+      - _title += " | " unless _title.empty?
+      - _title += "Pizza Accounting"
+      = _title
+    %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
+    = stylesheet_link_tag :application
+    = javascript_include_tag :application
+    = csrf_meta_tag
+    = yield(:head)
+
+  %body
+    #container
+      #menu
+        - if current_user
+          = t(:logged_as)
+          = link_to user_path(current_user) do
+            %strong
+              = current_user.email
+          |
+
+        - else
+          = link_to t('devise.login'), new_user_session_path
+          |
+
+      %hr
+
+      - flash.each do |name, msg|
+        = content_tag :div, msg, :id => "flash_#{name}"
+
+      = yield
