@@ -1,7 +1,12 @@
 PizzaAccounting::Application.routes.draw do
-
-  resources :users
   devise_for :users
+
+  resources :users do
+    resource :group
+  end
+
+  resources :groups
+
 
   root :to => "home#index"
   get "home/index"

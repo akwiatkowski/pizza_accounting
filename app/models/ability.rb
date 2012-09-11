@@ -7,6 +7,8 @@ class Ability
       can :manage, User
     else
       can :read, User, id: user.id
+      can :manage, Group, owner_id: user.id
+      cannot :destroy, Group
     end
   end
 end

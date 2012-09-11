@@ -209,9 +209,9 @@ PLATFORMS
 
 DEPENDENCIES
   cancan
-  capybara (>= 0.4.1.2)
-  coffee-rails (~> 3.2.1)
-  database_cleaner (>= 0.6.7)
+  capybara
+  coffee-rails
+  database_cleaner
   devise
   execjs
   factory_girl
@@ -230,9 +230,9 @@ DEPENDENCIES
   rails
   responders
   rspec-rails (>= 2.6.1.beta1)
-  sass-rails (~> 3.2.3)
+  sass-rails
   simple_form
   spork
   sqlite3
   therubyracer
-  uglifier (>= 1.0.3)
+  uglifier

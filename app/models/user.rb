@@ -7,10 +7,14 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
 
   def admin?
-    false
+    self.admin
   end
+
+  
+  has_one :owned_group, foreign_key: 'owner_id', class_name: 'Group'
+  before_save :build_owned_group, if: Proc.new{ |u| u.owned_group.nil? }
+  validates_presence_of :owned_group
 
 end

@@ -22,6 +22,10 @@
             %strong
               = current_user.email
           |
+          = link_to user_group_path(current_user, current_user.owned_group) do
+            = current_user.owned_group.name
+          |
+          = link_to t('devise.sign_out'), destroy_user_session_path, method: :delete
 
         - else
           = link_to t('devise.login'), new_user_session_path
