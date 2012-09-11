@@ -1,0 +1,23 @@
+%h1 Listing transactions
+
+%table
+  %tr
+    %th Amount
+    %th Direction
+    %th Desc
+    %th
+    %th
+    %th
+
+  - @transactions.each do |transaction|
+    %tr
+      %td= transaction.amount
+      %td= transaction.direction
+      %td= transaction.desc
+      %td= link_to 'Show', transaction
+      %td= link_to 'Edit', edit_transaction_path(transaction)
+      %td= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Transaction', new_transaction_path

@@ -4,11 +4,5 @@ class Group < ActiveRecord::Base
   validates_presence_of :name
 
   belongs_to :owner, foreign_key: 'owner_id', class_name: 'User'
-
-  before_save :generate_default_name
-
-  def generate_default_name
-    self.name ||= self.owner.email
-  end
-
+  has_and_belongs_to_many :users
 end

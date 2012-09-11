@@ -1,4 +1,6 @@
 PizzaAccounting::Application.routes.draw do
+  resources :transactions
+
   devise_for :users
 
   resources :users do
