@@ -8,4 +8,12 @@ class Transaction < ActiveRecord::Base
   validates_presence_of :amount, :direction, :group, :creator, :payer
 
   DIRECTIONS = { incoming: 1, outgoing: 5 }
+
+  def incoming_direction!
+    self.direction = DIRECTIONS[:incoming]
+  end
+
+  def outgoing_direction!
+    self.direction = DIRECTIONS[:outgoing]
+  end
 end
