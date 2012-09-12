@@ -2,22 +2,28 @@
 
 %p
   %b Name:
-  = @group.name
+  = resource.name
 %p
   %b Location:
-  = @group.location
+  = resource.location
 %p
   %b Desc:
-  = @group.desc
+  = resource.desc
 
 %p
   %b Users:
-  = @group.users.count
-%ul
-  - @group.users.each do |user|
-    %li
-      = link_to user.email, user
+  = resource.users.count
 
-= link_to 'Edit', edit_group_path(@group)
+%table
+  %tr
+    %th= t('user.email')
+    %th= t('user.balance')
+  - resource.users.each do |user|
+    %tr
+      %td= link_to user.email, user
+      %td= number_to_currency(user.balance(resource))
+      %td= link_to t('add'), new_group_transaction_path(resource)
+
+= link_to 'Edit', edit_group_path(resource)
 \|
 = link_to 'Back', groups_path

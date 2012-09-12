@@ -20,8 +20,12 @@ class User < ActiveRecord::Base
   validates_presence_of :owned_group
 
   has_and_belongs_to_many :groups
-  has_many :created_transactions, class_name: 'User', foreign_key: :creator_id
-  has_many :paid_transactions, class_name: 'User', foreign_key: :payer_id
+  has_many :created_transactions, class_name: 'Transaction', foreign_key: :creator_id
+  has_many :paid_transactions, class_name: 'Transaction', foreign_key: :payer_id
 
+  def balance(_group)
+    raise ArgumentError unless _group.kind_of? Group
+    return self.paid_transactions.where(group_id: _group.id).sum(:amount)
+  end
 
 end

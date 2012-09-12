@@ -7,7 +7,9 @@ PizzaAccounting::Application.routes.draw do
     resource :group
   end
 
-  resources :groups
+  resources :groups do
+    resources :transactions
+  end
 
 
   root :to => "home#index"

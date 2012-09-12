@@ -28,7 +28,7 @@ describe Transaction do
       t = Transaction.new
       t.creator = user_a
       t.payer = user_a
-      t.amount = 10
+      t.amount = 10.0
       t.incoming_direction!
       t.group = @group
       t.should be_valid
@@ -38,7 +38,7 @@ describe Transaction do
       t = Transaction.new
       t.creator = user_b
       t.payer = user_b
-      t.amount = 8
+      t.amount = 8.0
       t.incoming_direction!
       t.group = @group
       t.should be_valid
@@ -48,7 +48,7 @@ describe Transaction do
       t = Transaction.new
       t.creator = user_a
       t.payer = user_a
-      t.amount = 5
+      t.amount = 5.0
       t.outgoing_direction!
       t.group = @group
       t.should be_valid
@@ -58,14 +58,16 @@ describe Transaction do
       t = Transaction.new
       t.creator = user_b
       t.payer = user_b
-      t.amount = 6
-      t.incoming_direction!
+      t.amount = 6.0
+      t.outgoing_direction!
       t.group = @group
       t.should be_valid
       t.save!
       transactions << t
 
-      @users
+      user_a.balance(@group).should == 5.0
+      user_b.balance(@group).should == 2.0
+
     end
   end
 end
